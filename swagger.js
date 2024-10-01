@@ -5,8 +5,8 @@ const doc = {
         title: 'Cars & Albums API',
         description: 'This API handles cars and albums data.'
     },
-    host: 'localhost:3000', 
-    schemes: ['http'], 
+    host: 'cse341-qczx.onrender.com', 
+    schemes: ['https'], 
     definitions: {
         Car: {
             modelName: 'Model S',

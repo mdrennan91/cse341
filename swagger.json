@@ -5,10 +5,10 @@
     "description": "This API handles cars and albums data.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-qczx.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {

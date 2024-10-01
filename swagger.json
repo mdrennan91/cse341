@@ -1,0 +1,438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cars & Albums API",
+    "description": "This API handles cars and albums data.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/albums/": {
+      "get": {
+        "tags": [
+          "Albums"
+        ],
+        "description": "Fetches all albums",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Albums"
+        ],
+        "description": "Creates new album",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "albumName": {
+                  "example": "any"
+                },
+                "artist": {
+                  "example": "any"
+                },
+                "releaseDate": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "recordLabel": {
+                  "example": "any"
+                },
+                "numberOfTracks": {
+                  "example": "any"
+                },
+                "duration": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/albums/{id}": {
+      "get": {
+        "tags": [
+          "Albums"
+        ],
+        "description": "Fetches single album",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Albums"
+        ],
+        "description": "Modifies or updates album",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "albumName": {
+                  "example": "any"
+                },
+                "artist": {
+                  "example": "any"
+                },
+                "releaseDate": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "recordLabel": {
+                  "example": "any"
+                },
+                "numberOfTracks": {
+                  "example": "any"
+                },
+                "duration": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Albums"
+        ],
+        "description": "Deletes album",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cars/": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "description": "Fetches all cars",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "description": "Creates new car",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "modelName": {
+                  "example": "any"
+                },
+                "manufacturer": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                },
+                "engineType": {
+                  "example": "any"
+                },
+                "fuelEfficiency": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "horsepower": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cars/{id}": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "description": "Fetches single car",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cars"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "modelName": {
+                  "example": "any"
+                },
+                "manufacturer": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                },
+                "engineType": {
+                  "example": "any"
+                },
+                "fuelEfficiency": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "horsepower": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cars"
+        ],
+        "description": "Deletes car",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Car": {
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "example": "Model S"
+        },
+        "manufacturer": {
+          "type": "string",
+          "example": "Tesla"
+        },
+        "year": {
+          "type": "number",
+          "example": 2021
+        },
+        "engineType": {
+          "type": "string",
+          "example": "Electric"
+        },
+        "fuelEfficiency": {
+          "type": "number",
+          "example": 120
+        },
+        "price": {
+          "type": "number",
+          "example": 79990
+        },
+        "horsepower": {
+          "type": "number",
+          "example": 1020
+        }
+      }
+    },
+    "Album": {
+      "type": "object",
+      "properties": {
+        "albumName": {
+          "type": "string",
+          "example": "Nevermind"
+        },
+        "artist": {
+          "type": "string",
+          "example": "Nirvana"
+        },
+        "releaseDate": {
+          "type": "string",
+          "example": "1991-09-24"
+        },
+        "genre": {
+          "type": "string",
+          "example": "Alternative Rock"
+        },
+        "recordLabel": {
+          "type": "string",
+          "example": "DGC"
+        },
+        "numberOfTracks": {
+          "type": "number",
+          "example": 17
+        },
+        "duration": {
+          "type": "string",
+          "example": "42:36"
+        }
+      }
+    }
+  }
+}

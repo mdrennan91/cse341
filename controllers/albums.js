@@ -1,14 +1,6 @@
 const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
 
-const validateAlbum = (album) => {
-    const { albumName, artist, releaseDate, genre, recordLabel, numberOfTracks, duration } = album;
-    if (!albumName || !artist || !releaseDate || !genre || !recordLabel || !numberOfTracks || !duration) {
-        return false; // Validation failed
-    }
-    return true; // Validation passed
-};
-
 const getAllAlbums = async (req, res) => {
     //#swagger.tags=['Albums']
     try {
@@ -16,114 +8,109 @@ const getAllAlbums = async (req, res) => {
         const albums = await result.toArray();
         
         if (albums.length === 0) {
-            res.status(204).send();
+            return res.status(204).send(); 
         } else {
-            res.status(200).json(albums);
+            return res.status(200).json(albums); 
         }
     } catch (err) {
         console.error('Error fetching albums:', err);
-        res.status(500).send('Error fetching albums');
+        return res.status(500).send('Error fetching albums'); 
     }
 };
 
 const getSingleAlbum = async (req, res) => {
     //#swagger.tags=['Albums']
     try {
-        const albumId = new ObjectId(req.params.id);
-        const result = await mongodb.getDatabase().collection('albums').find({ _id: albumId });
+        const albumId = req.params.id;
+
+        if (!ObjectId.isValid(albumId)) {
+            return res.status(400).json({ message: 'Invalid album ID format' }); 
+        }
+
+        const result = await mongodb.getDatabase().collection('albums').find({ _id: new ObjectId(albumId) });
         const album = await result.toArray();
 
         if (album.length === 0) {
-            res.status(204).send();
+            return res.status(204).send();
         } else {
-            res.status(200).json(album[0]);
+            return res.status(200).json(album[0]); 
         }
     } catch (err) {
         console.error('Error fetching single album:', err);
-        res.status(500).send('Error fetching single album');
+        return res.status(500).json({ message: 'Error fetching single album' }); 
     }
 };
 
 const createAlbum = async (req, res) => {
     //#swagger.tags=['Albums']
     try {
-        const album = {
-            albumName: req.body.albumName,
-            artist: req.body.artist,
-            releaseDate: req.body.releaseDate,
-            genre: req.body.genre,
-            recordLabel: req.body.recordLabel,
-            numberOfTracks: req.body.numberOfTracks,
-            duration: req.body.duration
-        };
-
-        // Data validation
-        if (!validateAlbum(album)) {
-            return res.status(400).json({ message: 'Invalid album data' }); 
-        }
+        const album = { ...req.body };  
 
         const response = await mongodb.getDatabase().collection('albums').insertOne(album);
 
         if (response.acknowledged) {
-            res.status(201).json({
-                message: 'Album created successfully',
-                albumId: response.insertedId,
-                album: album
-            });
+            return res.status(201).json({ message: 'Album created successfully', albumId: response.insertedId });
         } else {
-            res.status(500).json({ message: 'Error creating album' });
+            return res.status(500).json({ message: 'Error creating album' }); 
         }
     } catch (err) {
         console.error('Error creating album:', err);
-        res.status(500).json({ message: 'Server error while creating album' });
+        return res.status(500).json({ message: 'Server error while creating album' }); 
     }
 };
 
 const updateAlbum = async (req, res) => {
     //#swagger.tags=['Albums']
     try {
-        const albumId = new ObjectId(req.params.id);
-        const album = {
-            albumName: req.body.albumName,
-            artist: req.body.artist,
-            releaseDate: req.body.releaseDate,
-            genre: req.body.genre,
-            recordLabel: req.body.recordLabel,
-            numberOfTracks: req.body.numberOfTracks,
-            duration: req.body.duration
-        };
+        const albumId = req.params.id;
 
-        // Data validation
-        if (!validateAlbum(album)) {
-            return res.status(400).json({ message: 'Invalid album data' }); 
+        if (!ObjectId.isValid(albumId)) {
+            return res.status(400).json({ message: 'Invalid album ID format' });
         }
 
-        const response = await mongodb.getDatabase().collection('albums').replaceOne({ _id: albumId }, album);
+        const albumUpdates = {
+            ...(req.body.albumName && { albumName: req.body.albumName }),
+            ...(req.body.artist && { artist: req.body.artist }),
+            ...(req.body.releaseDate && { releaseDate: req.body.releaseDate }),
+            ...(req.body.genre && { genre: req.body.genre }),
+            ...(req.body.recordLabel && { recordLabel: req.body.recordLabel }),
+            ...(req.body.numberOfTracks && { numberOfTracks: req.body.numberOfTracks }),
+            ...(req.body.duration && { duration: req.body.duration })
+        };
+
+        const response = await mongodb.getDatabase().collection('albums')
+            .updateOne({ _id: new ObjectId(albumId) }, { $set: albumUpdates });
 
         if (response.modifiedCount > 0) {
-            res.status(204).send(); 
+            return res.status(204).send(); 
         } else {
-            res.status(500).json({ message: 'Error updating album or album not found' });
+            return res.status(500).json({ message: 'Error updating album or album not found' });
         }
     } catch (err) {
         console.error('Error updating album:', err);
-        res.status(500).json({ message: 'Server error while updating album' });
+        return res.status(500).json({ message: 'Server error while updating album' });
     }
 };
 
 const deleteAlbum = async (req, res) => {
     //#swagger.tags=['Albums']
     try {
-        const albumId = new ObjectId(req.params.id);
-        const response = await mongodb.getDatabase().collection('albums').deleteOne({ _id: albumId });
+        const albumId = req.params.id;
+
+        if (!ObjectId.isValid(albumId)) {
+            return res.status(400).json({ message: 'Invalid album ID format' }); 
+        }
+
+        const response = await mongodb.getDatabase().collection('albums').deleteOne({ _id: new ObjectId(albumId) });
+
         if (response.deletedCount > 0) {
-            res.status(204).send(); 
+            return res.status(204).send(); 
         } else {
-            res.status(500).json({ message: 'Failed to delete album or album not found' });
+            return res.status(500).json({ message: 'Failed to delete album or album not found' }); 
         }
     } catch (err) {
         console.error('Error deleting album:', err);
-        res.status(500).json({ message: 'Server error while deleting album' });
+        return res.status(500).json({ message: 'Server error while deleting album' }); 
     }
 };
 

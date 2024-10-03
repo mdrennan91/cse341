@@ -1,19 +1,50 @@
-// validate.js (middleware)
+const validator = require('../helpers/validate');
 
 const validateAlbum = (req, res, next) => {
-    const { albumName, artist, releaseDate, genre, recordLabel, numberOfTracks, duration } = req.body;
-    if (!albumName || !artist || !releaseDate || !genre || !recordLabel || !numberOfTracks || !duration) {
-        return res.status(400).json({ message: 'Invalid album data' });
-    }
-    next();
+    const validationRule = {
+        albumName: 'required|string',
+        artist: 'required|string',
+        releaseDate: 'required|string',  
+        genre: 'required|string',
+        recordLabel: 'required|string',
+        numberOfTracks: 'required|numeric',
+        duration: 'required|numeric'
+    };
+    validator(req.body, validationRule, {}, (err, status) => {
+        if (!status) {
+            return res.status(400).json({
+                success: false,
+                message: 'Validation failed',
+                data: err
+            });
+        } else {
+            next();
+        }
+    });
 };
 
 const validateCar = (req, res, next) => {
-    const { modelName, manufacturer, year, engineType, fuelEfficiency, price, horsepower } = req.body;
-    if (!modelName || !manufacturer || !year || !engineType || !fuelEfficiency || !price || !horsepower) {
-        return res.status(400).json({ message: 'Invalid car data' });
-    }
-    next();
+    const validationRule = {
+        modelName: 'required|string',
+        manufacturer: 'required|string',
+        year: 'required|numeric',
+        engineType: 'required|string',
+        fuelEfficiency: 'required|numeric',
+        price: 'required|numeric',
+        horsepower: 'required|numeric'
+    };
+
+    validator(req.body, validationRule, {}, (err, status) => {
+        if (!status) {
+            return res.status(400).json({
+                success: false,
+                message: 'Validation failed',
+                data: err
+            });
+        } else {
+            next();
+        }
+    });
 };
 
 module.exports = {

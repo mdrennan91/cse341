@@ -30,10 +30,10 @@
         "description": "Fetches all albums",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "An array of albums is returned."
           },
           "204": {
-            "description": "No Content"
+            "description": "No albums found."
           },
           "500": {
             "description": "Internal Server Error"
@@ -44,7 +44,7 @@
         "tags": [
           "Albums"
         ],
-        "description": "Creates new album",
+        "description": "Creates a new album",
         "parameters": [
           {
             "name": "body",
@@ -53,25 +53,25 @@
               "type": "object",
               "properties": {
                 "albumName": {
-                  "example": "any"
+                  "example": "The Dark Side of the Moon"
                 },
                 "artist": {
-                  "example": "any"
+                  "example": "Pink Floyd"
                 },
                 "releaseDate": {
-                  "example": "any"
+                  "example": "1973-03-01"
                 },
                 "genre": {
-                  "example": "any"
+                  "example": "Progressive Rock"
                 },
                 "recordLabel": {
-                  "example": "any"
+                  "example": "Harvest Records"
                 },
                 "numberOfTracks": {
-                  "example": "any"
+                  "example": "10"
                 },
                 "duration": {
-                  "example": "any"
+                  "example": "43:00"
                 }
               }
             }
@@ -79,10 +79,10 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Album successfully created."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request. Invalid or missing album data."
           },
           "500": {
             "description": "Internal Server Error"
@@ -95,21 +95,22 @@
         "tags": [
           "Albums"
         ],
-        "description": "Fetches single album",
+        "description": "Fetches single album by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "The unique ID of the album to fetch.",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Album found and returned."
           },
           "204": {
-            "description": "No Content"
+            "description": "No album found with the provided ID."
           },
           "500": {
             "description": "Internal Server Error"
@@ -120,40 +121,42 @@
         "tags": [
           "Albums"
         ],
-        "description": "Modifies or updates album",
+        "description": "Modifies or updates an existing album",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "The unique ID of the album to update.",
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Updated album data in JSON format.",
             "schema": {
               "type": "object",
               "properties": {
                 "albumName": {
-                  "example": "any"
+                  "example": "The Dark Side of the Moon"
                 },
                 "artist": {
-                  "example": "any"
+                  "example": "Pink Floyd"
                 },
                 "releaseDate": {
-                  "example": "any"
+                  "example": "1973-03-01"
                 },
                 "genre": {
-                  "example": "any"
+                  "example": "Progressive Rock"
                 },
                 "recordLabel": {
-                  "example": "any"
+                  "example": "Harvest Records"
                 },
                 "numberOfTracks": {
-                  "example": "any"
+                  "example": "10"
                 },
                 "duration": {
-                  "example": "any"
+                  "example": "43:00"
                 }
               }
             }
@@ -161,10 +164,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Album successfully updated."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request. Invalid or missing album data."
           },
           "500": {
             "description": "Internal Server Error"
@@ -175,18 +178,19 @@
         "tags": [
           "Albums"
         ],
-        "description": "Deletes album",
+        "description": "Deletes an album by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "The unique ID of the album to delete.",
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Album successfully deleted."
           },
           "500": {
             "description": "Internal Server Error"
@@ -199,13 +203,13 @@
         "tags": [
           "Cars"
         ],
-        "description": "Fetches all cars",
+        "description": "Fetches all cars. Returns an array of car objects.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "An array of cars is returned."
           },
           "204": {
-            "description": "No Content"
+            "description": "No cars found."
           },
           "500": {
             "description": "Internal Server Error"
@@ -221,29 +225,30 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Car data in JSON format.",
             "schema": {
               "type": "object",
               "properties": {
                 "modelName": {
-                  "example": "any"
+                  "example": "Model S"
                 },
                 "manufacturer": {
-                  "example": "any"
+                  "example": "Tesla"
                 },
                 "year": {
-                  "example": "any"
+                  "example": "2021"
                 },
                 "engineType": {
-                  "example": "any"
+                  "example": "Electric"
                 },
                 "fuelEfficiency": {
-                  "example": "any"
+                  "example": "120"
                 },
                 "price": {
-                  "example": "any"
+                  "example": "79990"
                 },
                 "horsepower": {
-                  "example": "any"
+                  "example": "1020"
                 }
               }
             }
@@ -251,10 +256,10 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Car successfully created."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request. Invalid or missing car data."
           },
           "500": {
             "description": "Internal Server Error"
@@ -267,21 +272,22 @@
         "tags": [
           "Cars"
         ],
-        "description": "Fetches single car",
+        "description": "Fetches a single car by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "The unique ID of the car to fetch.",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Car found and returned."
           },
           "204": {
-            "description": "No Content"
+            "description": "No car found with the provided ID."
           },
           "500": {
             "description": "Internal Server Error"
@@ -307,25 +313,25 @@
               "type": "object",
               "properties": {
                 "modelName": {
-                  "example": "any"
+                  "example": "Model S"
                 },
                 "manufacturer": {
-                  "example": "any"
+                  "example": "Tesla"
                 },
                 "year": {
-                  "example": "any"
+                  "example": "2021"
                 },
                 "engineType": {
-                  "example": "any"
+                  "example": "Electric"
                 },
                 "fuelEfficiency": {
-                  "example": "any"
+                  "example": "120"
                 },
                 "price": {
-                  "example": "any"
+                  "example": "79990"
                 },
                 "horsepower": {
-                  "example": "any"
+                  "example": "1020"
                 }
               }
             }
@@ -333,10 +339,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Car successfully updated."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request. Invalid or missing car data."
           },
           "500": {
             "description": "Internal Server Error"
@@ -347,18 +353,19 @@
         "tags": [
           "Cars"
         ],
-        "description": "Deletes car",
+        "description": "Deletes a car by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "The unique ID of the car to delete.",
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Car successfully deleted."
           },
           "500": {
             "description": "Internal Server Error"

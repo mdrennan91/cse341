@@ -112,6 +112,9 @@
           "204": {
             "description": "No album found with the provided ID."
           },
+          "400": {
+            "description": "Invalid album ID format"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -289,6 +292,9 @@
           "204": {
             "description": "No car found with the provided ID."
           },
+          "400": {
+            "description": "Invalid car ID format"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -366,6 +372,9 @@
         "responses": {
           "204": {
             "description": "Car successfully deleted."
+          },
+          "400": {
+            "description": "Invalid album ID format"
           },
           "500": {
             "description": "Internal Server Error"

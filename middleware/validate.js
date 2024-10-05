@@ -8,7 +8,7 @@ const validateAlbum = (req, res, next) => {
         genre: 'required|string',
         recordLabel: 'required|string',
         numberOfTracks: 'required|numeric',
-        duration: 'required|numeric'
+        duration: 'required|string'
     };
     validator(req.body, validationRule, {}, (err, status) => {
         if (!status) {

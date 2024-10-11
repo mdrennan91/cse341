@@ -84,6 +84,9 @@
           "400": {
             "description": "Bad request. Invalid or missing album data."
           },
+          "401": {
+            "description": "You do not have access."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -172,6 +175,9 @@
           "400": {
             "description": "Bad request. Invalid or missing album data."
           },
+          "401": {
+            "description": "You do not have access."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -194,6 +200,9 @@
         "responses": {
           "204": {
             "description": "Album successfully deleted."
+          },
+          "401": {
+            "description": "You do not have access."
           },
           "500": {
             "description": "Internal Server Error"
@@ -263,6 +272,9 @@
           },
           "400": {
             "description": "Bad request. Invalid or missing car data."
+          },
+          "401": {
+            "description": "You do not have access."
           },
           "500": {
             "description": "Internal Server Error"
@@ -350,6 +362,9 @@
           "400": {
             "description": "Bad request. Invalid or missing car data."
           },
+          "401": {
+            "description": "You do not have access."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -375,6 +390,9 @@
           },
           "400": {
             "description": "Invalid album ID format"
+          },
+          "401": {
+            "description": "You do not have access."
           },
           "500": {
             "description": "Internal Server Error"
